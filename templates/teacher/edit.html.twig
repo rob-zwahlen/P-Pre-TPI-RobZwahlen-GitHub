@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="w-1/5">
+
+        <h2 class="text-xl font-medium">Créer un nouveau surnom</h2>
+        <h3 class="relative text-sm">Les champs requis sont suivi d'un <span class="absolute top-[-3px] ml-1 text-red-500 text-3xl">*</span></h3>
+
+        <div class="my-5">
+
+            {{ form_start(form) }}
+                
+                {{ form_row(form.firstname, {
+                    row_class: 'flex flex-col',
+                    label_class: 'text-sm',
+                    error_item_class: 'text-red-600',
+                    widget_class: 'w-full h-8 px-2 2xl:text-base xl:text-base lg:text-sm border border-gray-400 lg:rounded',
+                    widget_disabled_class: 'border-dashed text-gray-200',
+                    widget_errors_class: 'border-double border-red-500 bg-red-50',
+                }) }}
+
+                {{ form_row(form.lastname, {
+                    row_class: 'flex flex-col',
+                    label_class: 'text-sm',
+                    error_item_class: 'text-red-600',
+                    widget_class: 'w-full h-8 px-2 2xl:text-base xl:text-base lg:text-sm border border-gray-400 lg:rounded',
+                    widget_disabled_class: 'border-dashed text-gray-200',
+                    widget_errors_class: 'border-double border-red-500 bg-red-50',
+                }) }}
+
+                {{ form_row(form.gender, {
+                    row_class: 'flex flex-col',
+                    label_class: 'text-sm',
+                    error_item_class: 'text-red-600',
+                    widget_class: 'w-full h-8 px-2 2xl:text-base xl:text-base lg:text-sm border border-gray-400 lg:rounded',
+                    widget_disabled_class: 'border-dashed text-gray-200',
+                    widget_errors_class: 'border-double border-red-500 bg-red-50',
+                }) }}
+
+                {{ form_row(form.nickname, {
+                    row_class: 'flex flex-col',
+                    label_class: 'text-sm',
+                    error_item_class: 'text-red-600',
+                    widget_class: 'w-full h-8 px-2 2xl:text-base xl:text-base lg:text-sm border border-gray-400 lg:rounded',
+                    widget_disabled_class: 'border-dashed text-gray-200',
+                    widget_errors_class: 'border-double border-red-500 bg-red-50',
+                }) }}
+
+                {{ form_row(form.nickname_origin, {
+                    row_class: 'flex flex-col',
+                    label_class: 'text-sm',
+                    error_item_class: 'text-red-600',
+                    widget_class: 'w-full h-8 px-2 2xl:text-base xl:text-base lg:text-sm border border-gray-400 lg:rounded',
+                    widget_disabled_class: 'border-dashed text-gray-200',
+                    widget_errors_class: 'border-double border-red-500 bg-red-50',
+                }) }}
+
+                {{ form_row(form.section, {
+                    row_class: 'flex flex-col',
+                    label_class: 'text-sm',
+                    error_item_class: 'text-red-600',
+                    widget_class: 'w-full h-8 px-2 2xl:text-base xl:text-base lg:text-sm border border-gray-400 lg:rounded',
+                    widget_disabled_class: 'border-dashed text-gray-200',
+                    widget_errors_class: 'border-double border-red-500 bg-red-50',
+                }) }}
+
+                <div class="flex justify-between mt-5 space-x-3">
+                    <input type="submit" class="w-full py-1 px-10 bg-blue-500 hover:bg-blue-600 text-white 2xl:text-base xl:text-base lg:text-sm lg:rounded cursor-pointer" value="Modifier" />
+                    <a href="{{ path('app.index') }}" class="flex justify-center items-center w-full py-1 px-10 bg-gray-300 2xl:text-base xl:text-base lg:text-sm lg:rounded"><span class="fas fa-arrow-left mr-2"></span>Retour</a>
+                </div>
+
+            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+
+{% endblock %}

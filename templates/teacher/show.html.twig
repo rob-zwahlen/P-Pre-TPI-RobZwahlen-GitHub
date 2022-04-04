@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <a href="{{ path('app.index') }}" class="flex justify-center items-center w-min py-1 px-5 bg-gray-300 2xl:text-base xl:text-base lg:text-sm lg:rounded"><span class="fas fa-arrow-left mr-2"></span>Retour</a>
+
+    <div class="mt-5">
+
+        <h2 class="text-xl font-medium">Détail d'un enseignant</h2>
+
+        <div class="flex flex-col w-full h-auto divide-y divide-gray-300">
+
+            <div class="flex py-3">
+                <span class="w-full">Nom</span>
+                <span class="w-full">Genre</span>
+                <span class="w-full">Surnom</span>
+                <span class="w-full">Origine du surnom</span>
+                <span class="w-full">Section</span>
+                {% if user and is_granted('ROLE_ADMIN', user) %}
+                    <span class="w-full">Actions</span>
+                {% endif %}
+            </div>
+
+            <div class="flex py-5">
+                <span class="w-full">{{ teacher.userIdentifier }}</span>
+                <span class="w-full">
+                    {% if teacher.gender == 'm' %}
+                        Homme
+                    {% elseif teacher.gender == 'w' %}
+                        Femme
+                    {% else %}
+                        Autre
+                    {% endif %}
+                </span>
+                <span class="w-full">{{ teacher.nickname }}</span>
+                <span class="w-full">{{ teacher.nicknameOrigin }}</span>
+                <span class="w-full">{{ teacher.section.name }}</span>
+                {% if user and is_granted('ROLE_ADMIN', user) %}
+                    <div class="w-full">
+                        <a href="{{ path('teacher.update', {'id': teacher.id}) }}" class="py-1 px-3 text-white bg-blue-500 hover:bg-blue-600 border border-blue-500 rounded-sm"><span class="fas fa-pencil mr-2"></span>modifier</a>
+                        <a href="{{ path('teacher.delete', {'id': teacher.id}) }}" class="py-1 px-3 text-white bg-red-500 hover:bg-red-600 border border-red-500 rounded-sm"><span class="fas fa-times mr-2"></span>supprimer</a>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+    
+{% endblock %}

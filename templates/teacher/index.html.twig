@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2 class="text-xl font-medium">Surnom des enseignants</h2>
+
+    <div class="flex flex-col w-full h-auto pb-5 divide-y divide-gray-300">
+
+        <div class="flex py-3">
+            <span class="w-2/3 font-normal">Nom</span>
+            <span class="w-2/3 font-normal">Surnom</span>
+            <span class="w-full font-normal">Actions</span>
+        </div>
+
+        {% for teacher in teachers %}
+            <div class="flex py-3">
+                <span class="w-2/3">{{ teacher.userIdentifier }}</span>
+                <span class="w-2/3">{{ teacher.nickname }}</span>
+                <div class="flex w-full space-x-2">
+                    <a href="{{ path('teacher.detail', {'id': teacher.id}) }}" class="py-1 px-3 bg-gray-200 border border-gray-300 rounded-sm"><span class="fas fa-eye mr-2"></span>voir</a>
+                    {% if user and is_granted('ROLE_ADMIN', user) %}
+                        <a href="{{ path('teacher.update', {'id': teacher.id}) }}" class="py-1 px-3 text-white bg-blue-500 hover:bg-blue-600 border border-blue-500 rounded-sm"><span class="fas fa-pencil mr-2"></span>modifier</a>
+                        <form method="POST" action="{{ path('teacher.delete', {'id': teacher.id}) }}">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete-teacher') }}" />
+                            <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cet enseignant ?')" class="py-1 px-3 text-white bg-red-500 hover:bg-red-600 border border-red-500 rounded-sm"><span class="fas fa-times mr-2"></span>supprimer</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div>
+                <span class="text-lg">Pas d'enseignant enregistré.</span>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    {% if user and is_granted('ROLE_ADMIN', user) %}
+        <a href="{{ path('teacher.insert') }}" class="py-1 px-3 text-white bg-blue-500 hover:bg-blue-600 rounded-sm"><span class="fas fa-plus mr-2"></span>Nouveau</a>
+    {% endif %}
+
+{% endblock %}

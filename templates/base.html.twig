@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="author" content="{{ meta.author }}">
+        <meta name="keywords" content="{{ meta.keywords }}" />
+        <meta name="description" content="{{ meta.description }}" />
+        <meta name="reply-to" content="{{ meta.reply_to }}" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        {% block stylesheets %}
+            {{- encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="https://use.typekit.net/efd6uou.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        {% endblock %}
+        <!-- Scripts -->
+        {% block javascripts %}
+            {{- encore_entry_script_tags('app') }}
+        {% endblock %}
+        <title>{{ meta.title }} | ETML</title>
+    </head>
+    <body>
+
+        <header class="flex items-center w-full h-16 px-8 border-b border-gray-300 shadow">
+
+            <div>
+                <a href="/"><h1 class="etml-base text-2xl text-blue-600 uppercase">etml</h1></a>
+            </div>
+
+            <div class="flex items-center ml-auto">
+                {% if not user %}
+                    <a href="{{ path('app.login') }}" class="flex items-center py-2 px-3 text-white text-sm font-medium bg-blue-500 hover:bg-blue-600 rounded"><span class="fas fa-arrow-right-from-bracket mr-2"></span>Connexion</a>
+                {% else %}
+                    <span class="mr-10">Connecté en tant que : {{ user.userIdentifier }}</span>
+                    <a href="{{ path('app.logout') }}" class="flex items-center py-2 px-3 text-white text-sm font-medium bg-red-500 hover:bg-red-600 rounded"><span class="fas fa-arrow-right-from-bracket mr-2"></span>Déconnexion</a>
+                {% endif %}
+            </div>
+
+        </header>
+
+        <main class="p-8">
+            {% block body %}{% endblock %}
+        </main>
+
+    </body>
+</html>

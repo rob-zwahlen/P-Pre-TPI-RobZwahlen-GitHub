@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="author" content="{{ meta.author }}">
+        <meta name="keywords" content="{{ meta.keywords }}" />
+        <meta name="description" content="{{ meta.description }}" />
+        <meta name="reply-to" content="{{ meta.reply_to }}" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        {% block stylesheets %}
+            {{- encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="https://use.typekit.net/efd6uou.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        {% endblock %}
+        <title>{{ meta.title }} | ETML</title>
+    </head>
+    <body class="overflow-y-hidden">
+        <main class="flex justify-center items-center w-full h-screen">
+            <div class="2xl:w-2/5 xl:w-2/5 lg:w-1/2 md:w-2/3 w-5/6 h-auto">
+
+                <h1 class="2xl:text-3xl xl:text-2xl lg:text-2xl md:text-2xl text-xl">Bonjour,</h1>
+                <h2 class="2xl:text-3xl xl:text-2xl lg:text-2xl md:text-2xl text-xl font-semibold">Authentifiez-vous ici !</h2>
+                
+                <form method="POST" class="mt-10 space-y-5">
+
+                    <div class="flex w-full h-auto pb-1 border-b-2">
+                        <span class="fas fa-user text-lg"></span>
+                        <input type="text" value="{{ last_username }}" name="username" placeholder="Nom d'utilisateur" class="w-full h-auto pl-4 placeholder:text-gray-700 focus:outline-none" autocomplete="username" required="required" autofocus />
+                    </div>
+
+                    <div class="flex w-full h-auto pb-1 border-b-2">
+                        <span class="fas fa-lock text-lg"></span>
+                        <input type="password" name="password" placeholder="Mot de passe" class="w-full pl-4 placeholder:text-gray-700 focus:outline-none" autocomplete="current-password" required="required" />
+                    </div>
+
+                    <div class="flex flex-row-reverse justify-end w-full h-auto">
+                        <label for="remember_me" class="cursor-pointer select-none">Se souvenir de moi</label>
+                        <input type="checkbox" name="_remember_me" id="remember_me" class="mr-3 cursor-pointer" />
+                    </div>
+                    
+                    {% if error %}
+                        <div class="w-full h-auto px-3 py-2 border-2 border-red-500 rounded-sm">
+                            <span class="text-red-500">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                        </div>
+                    {% endif %}
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+                    <input type="submit" value="Connexion" class="lg:w-48 md:w-64 w-full h-10 text-white font-medium bg-blue-500 hover:bg-blue-600 rounded-sm cursor-pointer">
+
+                </form>
+
+            </div>
+        </main>
+    </body>
+</html>

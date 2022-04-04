@@ -1,0 +1,20 @@
+@font-face { font-family: 'etml'; src: url("../fonts/ETML_Regular.ttf"); }
+
+* {
+    font-family: 'raleway', sans-serif;
+    font-weight: 300;
+}
+
+.etml-base { font-family: 'etml', sans-serif; }
+
+label {
+    position: relative;
+}
+
+label.required:after {
+    content: "*";
+    position: absolute;
+    top: 2px;
+    color: red;
+    font-size: 24px;
+}
