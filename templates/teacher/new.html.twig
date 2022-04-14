@@ -65,6 +65,15 @@
                     widget_errors_class: 'border-double border-red-500 bg-red-50',
                 }) }}
 
+                {{ form_row(form.disciplines, {
+                    row_class: 'flex flex-col',
+                    label_class: 'text-sm',
+                    error_item_class: 'text-red-600',
+                    widget_class: 'w-full h-auto 2xl:text-base xl:text-base lg:text-sm border border-gray-400 lg:rounded',
+                    widget_disabled_class: 'border-dashed text-gray-200',
+                    widget_errors_class: 'border-double border-red-500 bg-red-50',
+                }) }}
+
                 <div class="flex justify-between mt-5 space-x-3">
                     <input type="submit" class="w-full py-1 px-10 bg-blue-500 hover:bg-blue-600 text-white 2xl:text-base xl:text-base lg:text-sm lg:rounded cursor-pointer" value="Ajouter" />
                     <a href="{{ path('app.index') }}" class="flex justify-center items-center w-full py-1 px-10 bg-gray-300 2xl:text-base xl:text-base lg:text-sm lg:rounded"><span class="fas fa-arrow-left mr-2"></span>Retour</a>

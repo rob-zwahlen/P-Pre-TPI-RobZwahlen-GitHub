@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TeacherRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -45,6 +47,14 @@ class Teacher
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'teachers')]
     #[ORM\JoinColumn(nullable: false)]
     private $section;
+
+    #[ORM\ManyToMany(targetEntity: Discipline::class, mappedBy: 'teachers')]
+    private $disciplines;
+
+    public function __construct()
+    {
+        $this->disciplines = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -124,6 +134,30 @@ class Teacher
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getDisciplines(): Collection
+    {
+        return $this->disciplines;
+    }
+
+    public function addDiscipline(Discipline $discipline): self
+    {
+        if (!$this->disciplines->contains($discipline)) {
+            $this->disciplines[] = $discipline;
+            $discipline->addTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscipline(Discipline $discipline): self
+    {
+        if ($this->disciplines->removeElement($discipline)) {
+            $discipline->removeTeacher($this);
+        }
 
         return $this;
     }
