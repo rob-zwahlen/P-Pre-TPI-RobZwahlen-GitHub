@@ -1,6 +1,6 @@
 import './styles/app.css';
 import './bootstrap';
-/*import TomSelect from 'tom-select';
+import TomSelect from 'tom-select';
 
 async function jsonFetch (url) 
 {
@@ -25,23 +25,22 @@ async function jsonFetch (url)
  * @param {HTMLSelectElement} select 
  */
 
-/*
 function bindSelect(select) 
 {
     new TomSelect(select, {
         hideSelected: true,
-        closeAfterSelect: true,
-        valueProperty: 'id',
-        labelProperty: 'name',
-        searchProperty: 'name',
+        closeAfterSelect: false,
+        valueProperty: select.getAttribute('data-value'),
+        labelProperty: select.getAttribute('data-label'),
+        searchProperty: select.getAttribute('data-label'),
         plugins: {
-            remove_button: {title: ''}
+            remove_button: {title: 'Supprimer cet élément'}
         },
         load: async (query, callback) => {
-            const url = `${select.dataset.remote}?q=${encodeURIComponent(query)}`
+            const url = `${select.getAttribute('data-remote')}?q=${encodeURIComponent(query)}`
             callback(await jsonFetch(url))
         }
     })
 }
 
-Array.from(document.querySelectorAll('select[multiple]')).map(bindSelect)*/
+Array.from(document.querySelectorAll('select[multiple]')).map(bindSelect)
